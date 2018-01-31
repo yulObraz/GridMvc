@@ -71,5 +71,13 @@ namespace GridMvc.Filtering.Types
         }
 
         #endregion
+
+        public virtual string DefaultWidgetName {
+            get { return null; }
+        }
+
+        public virtual object DefaultWidgetData {
+            get { return null; }
+        }
     }
 }

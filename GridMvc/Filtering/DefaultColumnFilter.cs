@@ -18,7 +18,11 @@ namespace GridMvc.Filtering
         {
             _expression = expression;
         }
-
+        internal IFilterType FilterType {
+            get {
+                return _typeResolver.GetFilterType(typeof(TData));
+            }
+        }
         #region IColumnFilter<T> Members
 
         public IQueryable<T> ApplyFilter(IQueryable<T> items, ColumnFilterValue value)

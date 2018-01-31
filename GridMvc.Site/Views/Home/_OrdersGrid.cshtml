@@ -52,6 +52,10 @@
                 .SetWidth(70)
                 .Css("hidden-xs") //hide on phones
                 .RenderValueAs(o => CustomRenderingOfColumn(o));
-
+        /* Adding "Ship Via" column: */
+        columns.Add(o => o.ShipVia)
+                .Titled("Ship Via")
+                .SetWidth(70)
+                .RenderValueAs(o => o.ShipVia == null ? "" : o.ShipVia.Value.DisplayName());
     }).SetRowCssClasses(item => item.Customer.IsVip ? "success" : string.Empty).WithPaging(15).Sortable().Filterable().WithMultipleFilters()
 

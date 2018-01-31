@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GridMvc.Utility;
+using System;
 using System.Collections.Generic;
 
 namespace GridMvc.Filtering.Types
@@ -32,6 +33,9 @@ namespace GridMvc.Filtering.Types
                 if (filterType.TargetType.FullName == type.FullName)
                     return filterType;
             }
+            if(PropertiesHelper.GetUnderlyingType(type).IsEnum)
+                return new EnumFilterType(PropertiesHelper.GetUnderlyingType(type));
+
             return new TextFilterType(); //try to process column type as text (not safe)
         }
     }

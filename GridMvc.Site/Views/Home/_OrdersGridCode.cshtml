@@ -39,6 +39,12 @@
                 .SetWidth(150)
                 .RenderValueAs(o => CustomRenderingOfColumn(o));
 
-    }).SetRowCssClasses(item => item.Customer.IsVip ? "warning" : string.Empty).WithPaging(15).Sortable().Filterable().WithMultipleFilters()
+        /* Adding "Ship Via" column: */
+        columns.Add(o => o.ShipVia)
+                .Titled("Ship Via")
+                .SetWidth(70)
+                .RenderValueAs(o => o.ShipVia == null ? "" : o.ShipVia.Value.DisplayName());
+
+    }).SetRowCssClasses(item => item.Customer.IsVip ? "success" : string.Empty).WithPaging(15).Sortable().Filterable().WithMultipleFilters()
     </pre>
 </div>

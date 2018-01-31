@@ -25,5 +25,8 @@ namespace GridMvc.Filtering.Types
         object GetTypedValue(string value);
 
         Expression GetFilterExpression(Expression leftExpr, string value, GridFilterType filterType);
+
+        string DefaultWidgetName { get; }
+        object DefaultWidgetData { get; }
     }
 }

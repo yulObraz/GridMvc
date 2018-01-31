@@ -43,8 +43,7 @@ namespace GridMvc.Site.Models
         public DateTime? RequiredDate { get; set; }
         [NotMappedColumn]
         public DateTime? ShippedDate { get; set; }
-        [NotMappedColumn]
-        public int? ShipVia { get; set; }
+		public ShipperEnum? ShipVia { get; set; }
         [GridColumn(Title = "Freight", Width = "120px", SortEnabled = true, FilterEnabled = true)]
         public decimal? Freight { get; set; }
 

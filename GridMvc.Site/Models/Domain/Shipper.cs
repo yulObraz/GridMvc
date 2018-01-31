@@ -11,8 +11,19 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GridMvc.Site.Models
 {
-    using System;
-    using System.Collections.Generic;
+	using System;
+	using System.Collections.Generic;
+
+	public enum ShipperEnum { // Generally bad decision to use enum for it.
+		Unknown,
+		[Display(Name = "Speedy Express")]
+		SpeedyExpress,
+		[Display(Name = "United Package")]
+		UnitedPackage,
+		[Display(Name = "Federal Shipping")]
+		FederalShipping
+	};
+
     
     public partial class Shipper
     {

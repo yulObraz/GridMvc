@@ -4,6 +4,7 @@ using System.Linq.Expressions;
 using GridMvc.Filtering;
 using GridMvc.Sorting;
 using GridMvc.Utility;
+using System.Linq;
 
 namespace GridMvc.Columns
 {
@@ -60,7 +61,11 @@ namespace GridMvc.Columns
 
                 _constraint = expression.Compile();
                 _orderers.Insert(0, new OrderByGridOrderer<T, TDataType>(expression));
-                _filter = new DefaultColumnFilter<T, TDataType>(expression);
+                var defaultFilter = new DefaultColumnFilter<T, TDataType>(expression);
+                var filterType = defaultFilter.FilterType;
+                _filterWidgetTypeName = filterType.DefaultWidgetName ?? _filterWidgetTypeName;
+                FilterWidgetData = filterType.DefaultWidgetData;
+                _filter = defaultFilter;
                 //Generate unique column name:
                 Name = PropertiesHelper.BuildColumnNameFromMemberExpression(expr);
                 Title = Name; //Using the same name by default
@@ -194,6 +199,10 @@ namespace GridMvc.Columns
                     textValue = string.Empty;
                 else if (!string.IsNullOrEmpty(ValuePattern))
                     textValue = string.Format(ValuePattern, value);
+                //else if(PropertiesHelper.GetUnderlyingType(value.GetType()).IsEnum) {
+                //    var display = value.GetType().GetField(value.ToString()).GetCustomAttributes(typeof(System.ComponentModel.DataAnnotations.DisplayAttribute), false).Cast<System.ComponentModel.DataAnnotations.DisplayAttribute>().FirstOrDefault();
+                //    textValue = (display == null ? value.ToString() : display.Name);
+                //}
                 else
                     textValue = value.ToString();
             }
